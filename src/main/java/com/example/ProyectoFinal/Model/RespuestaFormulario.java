@@ -2,38 +2,44 @@ package com.example.ProyectoFinal.Model;
 
 import jakarta.persistence.*;
 
+
 @Entity
 public class RespuestaFormulario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idRespuesta;
 
     private String respuesta;
 
     @ManyToOne
-    @JoinColumn(name = "paciente_id")
+    @JoinColumn(name = "id_formulario")
+    private Formulario formulario;
+
+    @ManyToOne
+    @JoinColumn(name = "id_paciente")
     private Paciente paciente;
 
     @ManyToOne
-    @JoinColumn(name = "formulario_id")
-    private Formulario formulario;
+    @JoinColumn(name = "id_pregunta")
+    private PreguntaFormulario pregunta;
 
-    public RespuestaFormulario() {}
+    public RespuestaFormulario() {
+    }
 
-    public RespuestaFormulario(Long id, String respuesta, Paciente paciente, Formulario formulario) {
-        this.id = id;
+    public RespuestaFormulario(Long idRespuesta, String respuesta, Formulario formulario, Paciente paciente, PreguntaFormulario pregunta) {
+        this.idRespuesta = idRespuesta;
         this.respuesta = respuesta;
-        this.paciente = paciente;
         this.formulario = formulario;
+        this.paciente = paciente;
+        this.pregunta = pregunta;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdRespuesta() {
+        return idRespuesta;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdRespuesta(Long idRespuesta) {
+        this.idRespuesta = idRespuesta;
     }
 
     public String getRespuesta() {
@@ -44,14 +50,6 @@ public class RespuestaFormulario {
         this.respuesta = respuesta;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
     public Formulario getFormulario() {
         return formulario;
     }
@@ -60,13 +58,30 @@ public class RespuestaFormulario {
         this.formulario = formulario;
     }
 
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public PreguntaFormulario getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(PreguntaFormulario pregunta) {
+        this.pregunta = pregunta;
+    }
+
     @Override
     public String toString() {
         return "RespuestaFormulario{" +
-                "id=" + id +
+                "idRespuesta=" + idRespuesta +
                 ", respuesta='" + respuesta + '\'' +
-                ", paciente=" + paciente +
                 ", formulario=" + formulario +
+                ", paciente=" + paciente +
+                ", pregunta=" + pregunta +
                 '}';
     }
 }

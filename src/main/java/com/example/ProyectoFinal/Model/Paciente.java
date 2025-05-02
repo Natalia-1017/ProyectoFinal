@@ -1,67 +1,59 @@
 package com.example.ProyectoFinal.Model;
 
 import jakarta.persistence.*;
+
 import java.util.List;
+
 
 @Entity
 public class Paciente {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idPaciente;
 
-    private String nombre;
-    private String correo;
-    private int edad;
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "psicologo_id")
+    @JoinColumn(name = "id_psicologo")
     private Psicologo psicologo;
+
+    @OneToMany(mappedBy = "paciente")
+    private List<RespuestaFormulario> respuestas;
 
     @OneToMany(mappedBy = "paciente")
     private List<Sesion> sesiones;
 
-    public Paciente() {}
+    @OneToMany(mappedBy = "paciente")
+    private List<AlertaEmergencia> alertas;
 
-    public Paciente(Long id, String nombre, String correo, int edad, Psicologo psicologo, List<Sesion> sesiones) {
-        this.id = id;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.edad = edad;
+    public Paciente() {
+    }
+
+    public Paciente(Long idPaciente, Usuario usuario, Psicologo psicologo, List<RespuestaFormulario> respuestas, List<Sesion> sesiones, List<AlertaEmergencia> alertas) {
+        this.idPaciente = idPaciente;
+        this.usuario = usuario;
         this.psicologo = psicologo;
+        this.respuestas = respuestas;
         this.sesiones = sesiones;
+        this.alertas = alertas;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPaciente(Long idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Psicologo getPsicologo() {
@@ -72,6 +64,14 @@ public class Paciente {
         this.psicologo = psicologo;
     }
 
+    public List<RespuestaFormulario> getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(List<RespuestaFormulario> respuestas) {
+        this.respuestas = respuestas;
+    }
+
     public List<Sesion> getSesiones() {
         return sesiones;
     }
@@ -80,15 +80,23 @@ public class Paciente {
         this.sesiones = sesiones;
     }
 
+    public List<AlertaEmergencia> getAlertas() {
+        return alertas;
+    }
+
+    public void setAlertas(List<AlertaEmergencia> alertas) {
+        this.alertas = alertas;
+    }
+
     @Override
     public String toString() {
         return "Paciente{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", correo='" + correo + '\'' +
-                ", edad=" + edad +
+                "idPaciente=" + idPaciente +
+                ", usuario=" + usuario +
                 ", psicologo=" + psicologo +
+                ", respuestas=" + respuestas +
                 ", sesiones=" + sesiones +
+                ", alertas=" + alertas +
                 '}';
     }
 }

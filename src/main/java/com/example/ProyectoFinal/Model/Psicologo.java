@@ -1,62 +1,57 @@
 package com.example.ProyectoFinal.Model;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
 public class Psicologo {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idPsicologo;
 
-    private String nombre;
-    private String correo;
-    private String especialidad;
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "psicologo")
     private List<Paciente> pacientes;
 
-    public Psicologo() {}
+    @OneToMany(mappedBy = "psicologo")
+    private List<Formulario> formularios;
 
-    public Psicologo(Long id, String nombre, String correo, String especialidad, List<Paciente> pacientes) {
-        this.id = id;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.especialidad = especialidad;
+    @OneToMany(mappedBy = "psicologo")
+    private List<Sesion> sesiones;
+
+    @OneToMany(mappedBy = "psicologo")
+    private List<AlertaEmergencia> alertas;
+
+    public Psicologo() {
+    }
+
+    public Psicologo(Long idPsicologo, Usuario usuario, List<Paciente> pacientes, List<Formulario> formularios, List<Sesion> sesiones, List<AlertaEmergencia> alertas) {
+        this.idPsicologo = idPsicologo;
+        this.usuario = usuario;
         this.pacientes = pacientes;
+        this.formularios = formularios;
+        this.sesiones = sesiones;
+        this.alertas = alertas;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdPsicologo() {
+        return idPsicologo;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPsicologo(Long idPsicologo) {
+        this.idPsicologo = idPsicologo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public List<Paciente> getPacientes() {
@@ -67,14 +62,39 @@ public class Psicologo {
         this.pacientes = pacientes;
     }
 
+    public List<Formulario> getFormularios() {
+        return formularios;
+    }
+
+    public void setFormularios(List<Formulario> formularios) {
+        this.formularios = formularios;
+    }
+
+    public List<Sesion> getSesiones() {
+        return sesiones;
+    }
+
+    public void setSesiones(List<Sesion> sesiones) {
+        this.sesiones = sesiones;
+    }
+
+    public List<AlertaEmergencia> getAlertas() {
+        return alertas;
+    }
+
+    public void setAlertas(List<AlertaEmergencia> alertas) {
+        this.alertas = alertas;
+    }
+
     @Override
     public String toString() {
         return "Psicologo{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", correo='" + correo + '\'' +
-                ", especialidad='" + especialidad + '\'' +
+                "idPsicologo=" + idPsicologo +
+                ", usuario=" + usuario +
                 ", pacientes=" + pacientes +
+                ", formularios=" + formularios +
+                ", sesiones=" + sesiones +
+                ", alertas=" + alertas +
                 '}';
     }
 }

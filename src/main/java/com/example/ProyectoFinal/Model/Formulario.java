@@ -5,48 +5,63 @@ import java.util.List;
 
 @Entity
 public class Formulario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idFormulario;
 
-    private String titulo;
-    private String descripcion;
+    private String nombre;
 
-    @OneToMany(mappedBy = "formulario", cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "id_psicologo")
+    private Psicologo psicologo;
+
+    @OneToMany(mappedBy = "formulario")
+    private List<PreguntaFormulario> preguntas;
+
+    @OneToMany(mappedBy = "formulario")
     private List<RespuestaFormulario> respuestas;
 
-    public Formulario() {}
+    public Formulario() {
+    }
 
-    public Formulario(Long id, String titulo, String descripcion, List<RespuestaFormulario> respuestas) {
-        this.id = id;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
+    public Formulario(Long idFormulario, String nombre, Psicologo psicologo, List<PreguntaFormulario> preguntas, List<RespuestaFormulario> respuestas) {
+        this.idFormulario = idFormulario;
+        this.nombre = nombre;
+        this.psicologo = psicologo;
+        this.preguntas = preguntas;
         this.respuestas = respuestas;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdFormulario() {
+        return idFormulario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdFormulario(Long idFormulario) {
+        this.idFormulario = idFormulario;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Psicologo getPsicologo() {
+        return psicologo;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setPsicologo(Psicologo psicologo) {
+        this.psicologo = psicologo;
+    }
+
+    public List<PreguntaFormulario> getPreguntas() {
+        return preguntas;
+    }
+
+    public void setPreguntas(List<PreguntaFormulario> preguntas) {
+        this.preguntas = preguntas;
     }
 
     public List<RespuestaFormulario> getRespuestas() {
@@ -60,9 +75,10 @@ public class Formulario {
     @Override
     public String toString() {
         return "Formulario{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", descripcion='" + descripcion + '\'' +
+                "idFormulario=" + idFormulario +
+                ", nombre='" + nombre + '\'' +
+                ", psicologo=" + psicologo +
+                ", preguntas=" + preguntas +
                 ", respuestas=" + respuestas +
                 '}';
     }

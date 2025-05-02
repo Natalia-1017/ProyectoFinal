@@ -1,16 +1,17 @@
 package com.example.ProyectoFinal.Model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
-public class Sesion {
+public class AlertaEmergencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idSesion;
+    private Long idAlerta;
 
+    private String mensaje;
     private LocalDateTime fecha;
-    private String notas;
 
     @ManyToOne
     @JoinColumn(name = "id_paciente")
@@ -20,23 +21,31 @@ public class Sesion {
     @JoinColumn(name = "id_psicologo")
     private Psicologo psicologo;
 
-    public Sesion() {
+    public AlertaEmergencia() {
     }
 
-    public Sesion(Long idSesion, LocalDateTime fecha, String notas, Paciente paciente, Psicologo psicologo) {
-        this.idSesion = idSesion;
+    public AlertaEmergencia(Long idAlerta, String mensaje, LocalDateTime fecha, Paciente paciente, Psicologo psicologo) {
+        this.idAlerta = idAlerta;
+        this.mensaje = mensaje;
         this.fecha = fecha;
-        this.notas = notas;
         this.paciente = paciente;
         this.psicologo = psicologo;
     }
 
-    public Long getIdSesion() {
-        return idSesion;
+    public Long getIdAlerta() {
+        return idAlerta;
     }
 
-    public void setIdSesion(Long idSesion) {
-        this.idSesion = idSesion;
+    public void setIdAlerta(Long idAlerta) {
+        this.idAlerta = idAlerta;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
     public LocalDateTime getFecha() {
@@ -45,14 +54,6 @@ public class Sesion {
 
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
-    }
-
-    public String getNotas() {
-        return notas;
-    }
-
-    public void setNotas(String notas) {
-        this.notas = notas;
     }
 
     public Paciente getPaciente() {
@@ -73,10 +74,10 @@ public class Sesion {
 
     @Override
     public String toString() {
-        return "Sesion{" +
-                "idSesion=" + idSesion +
+        return "AlertaEmergencia{" +
+                "idAlerta=" + idAlerta +
+                ", mensaje='" + mensaje + '\'' +
                 ", fecha=" + fecha +
-                ", notas='" + notas + '\'' +
                 ", paciente=" + paciente +
                 ", psicologo=" + psicologo +
                 '}';
