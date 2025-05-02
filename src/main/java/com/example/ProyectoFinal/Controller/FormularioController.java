@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
+@RequestMapping("/api/Formulario")
 public class FormularioController {
     @Autowired
     private FormularioService formularioService;
@@ -34,6 +35,4 @@ public class FormularioController {
     public Formulario actualizar(@PathVariable Long id, @RequestBody Formulario actualizado) {
         return formularioService.actualizar(id, actualizado);
     }
-}
-
 }
