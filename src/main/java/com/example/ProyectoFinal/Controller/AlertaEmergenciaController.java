@@ -1,6 +1,7 @@
 package com.example.ProyectoFinal.Controller;
 
 import com.example.ProyectoFinal.Model.AlertaEmergencia;
+import com.example.ProyectoFinal.Service.AlertaEmergenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,10 @@ public class AlertaEmergenciaController {
     @GetMapping("/listar")
     public List<AlertaEmergencia> listar() {
         return alertaService.listar();
+    }
+    @GetMapping("/buscar/{id}")
+    public AlertaEmergencia buscarPorId(@PathVariable Long id) {
+        return alertaService.buscarPorId(id);
     }
 
     @DeleteMapping("/eliminar/{id}")

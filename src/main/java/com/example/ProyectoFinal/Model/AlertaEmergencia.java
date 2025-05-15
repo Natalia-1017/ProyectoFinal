@@ -21,15 +21,19 @@ public class AlertaEmergencia {
     @JoinColumn(name = "id_psicologo")
     private Psicologo psicologo;
 
+    @Enumerated(EnumType.STRING)
+    private EstadoAlerta estado;
+
     public AlertaEmergencia() {
     }
 
-    public AlertaEmergencia(Long idAlerta, String mensaje, LocalDateTime fecha, Paciente paciente, Psicologo psicologo) {
+    public AlertaEmergencia(Long idAlerta, String mensaje, LocalDateTime fecha, Paciente paciente, Psicologo psicologo, EstadoAlerta estado) {
         this.idAlerta = idAlerta;
         this.mensaje = mensaje;
         this.fecha = fecha;
         this.paciente = paciente;
         this.psicologo = psicologo;
+        this.estado = estado;
     }
 
     public Long getIdAlerta() {
@@ -72,6 +76,14 @@ public class AlertaEmergencia {
         this.psicologo = psicologo;
     }
 
+    public EstadoAlerta getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoAlerta estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
         return "AlertaEmergencia{" +
@@ -80,6 +92,11 @@ public class AlertaEmergencia {
                 ", fecha=" + fecha +
                 ", paciente=" + paciente +
                 ", psicologo=" + psicologo +
+                ", estado=" + estado +
                 '}';
+    }
+
+    public void setId(Long id) {
+
     }
 }

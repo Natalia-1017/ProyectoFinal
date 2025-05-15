@@ -1,6 +1,7 @@
 package com.example.ProyectoFinal.Controller;
 
 import com.example.ProyectoFinal.Model.Paciente;
+import com.example.ProyectoFinal.Service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,10 @@ public class PacienteController {
     public List<Paciente> listar() {
         return pacienteService.listar();
     }
-
+    @GetMapping("/buscar/{id}")
+    public Paciente buscarPorId(@PathVariable Long id) {
+        return pacienteService.buscarPorId(id);
+    }
     @DeleteMapping("/eliminar/{id}")
     public void eliminar(@PathVariable Long id) {
         pacienteService.eliminar(id);

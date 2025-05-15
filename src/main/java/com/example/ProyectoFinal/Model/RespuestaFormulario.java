@@ -84,4 +84,8 @@ public class RespuestaFormulario {
                 ", pregunta=" + pregunta +
                 '}';
     }
+
+    public void setId(Long id) {
+
+    }
 }

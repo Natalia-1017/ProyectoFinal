@@ -82,4 +82,8 @@ public class Formulario {
                 ", respuestas=" + respuestas +
                 '}';
     }
+
+    public void setId(Long id) {
+
+    }
 }

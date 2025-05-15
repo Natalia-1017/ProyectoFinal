@@ -12,6 +12,9 @@ public class Sesion {
     private LocalDateTime fecha;
     private String notas;
 
+    @Enumerated(EnumType.STRING)
+    private EstadoSesion estado;
+
     @ManyToOne
     @JoinColumn(name = "id_paciente")
     private Paciente paciente;
@@ -23,10 +26,11 @@ public class Sesion {
     public Sesion() {
     }
 
-    public Sesion(Long idSesion, LocalDateTime fecha, String notas, Paciente paciente, Psicologo psicologo) {
+    public Sesion(Long idSesion, LocalDateTime fecha, String notas, EstadoSesion estado, Paciente paciente, Psicologo psicologo) {
         this.idSesion = idSesion;
         this.fecha = fecha;
         this.notas = notas;
+        this.estado = estado;
         this.paciente = paciente;
         this.psicologo = psicologo;
     }
@@ -55,6 +59,14 @@ public class Sesion {
         this.notas = notas;
     }
 
+    public EstadoSesion getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoSesion estado) {
+        this.estado = estado;
+    }
+
     public Paciente getPaciente() {
         return paciente;
     }
@@ -77,8 +89,13 @@ public class Sesion {
                 "idSesion=" + idSesion +
                 ", fecha=" + fecha +
                 ", notas='" + notas + '\'' +
+                ", estado=" + estado +
                 ", paciente=" + paciente +
                 ", psicologo=" + psicologo +
                 '}';
+    }
+
+    public void setId(Long id) {
+
     }
 }

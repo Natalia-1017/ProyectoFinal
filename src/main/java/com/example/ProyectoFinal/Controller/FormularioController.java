@@ -1,6 +1,7 @@
 package com.example.ProyectoFinal.Controller;
 
 import com.example.ProyectoFinal.Model.Formulario;
+import com.example.ProyectoFinal.Service.FormularioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,10 @@ public class FormularioController {
     public List<Formulario> listar() {
         return formularioService.listar();
     }
-
+    @GetMapping("/buscar/{id}")
+    public Formulario buscarPorId(@PathVariable Long id) {
+        return formularioService.buscarPorId(id);
+    }
     @DeleteMapping("/eliminar/{id}")
     public void eliminar(@PathVariable Long id) {
         formularioService.eliminar(id);

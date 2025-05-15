@@ -55,4 +55,8 @@ public class PreguntaFormulario {
                 ", formulario=" + formulario +
                 '}';
     }
+
+    public void setId(Long id) {
+
+    }
 }

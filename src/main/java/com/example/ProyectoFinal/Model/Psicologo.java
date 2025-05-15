@@ -1,6 +1,8 @@
 package com.example.ProyectoFinal.Model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class Psicologo {
 
     @OneToOne
     @JoinColumn(name = "id_usuario")
+    @Fetch(FetchMode.JOIN)
     private Usuario usuario;
 
     @OneToMany(mappedBy = "psicologo")
@@ -96,5 +99,9 @@ public class Psicologo {
                 ", sesiones=" + sesiones +
                 ", alertas=" + alertas +
                 '}';
+    }
+
+    public void setId(Long id) {
+
     }
 }

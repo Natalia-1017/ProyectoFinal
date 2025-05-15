@@ -28,16 +28,20 @@ public class Paciente {
     @OneToMany(mappedBy = "paciente")
     private List<AlertaEmergencia> alertas;
 
+    @OneToMany(mappedBy = "paciente")
+    private List<Diario> diarios;
+
     public Paciente() {
     }
 
-    public Paciente(Long idPaciente, Usuario usuario, Psicologo psicologo, List<RespuestaFormulario> respuestas, List<Sesion> sesiones, List<AlertaEmergencia> alertas) {
+    public Paciente(Long idPaciente, Usuario usuario, Psicologo psicologo, List<RespuestaFormulario> respuestas, List<Sesion> sesiones, List<AlertaEmergencia> alertas, List<Diario> diarios) {
         this.idPaciente = idPaciente;
         this.usuario = usuario;
         this.psicologo = psicologo;
         this.respuestas = respuestas;
         this.sesiones = sesiones;
         this.alertas = alertas;
+        this.diarios = diarios;
     }
 
     public Long getIdPaciente() {
@@ -88,6 +92,14 @@ public class Paciente {
         this.alertas = alertas;
     }
 
+    public List<Diario> getDiarios() {
+        return diarios;
+    }
+
+    public void setDiarios(List<Diario> diarios) {
+        this.diarios = diarios;
+    }
+
     @Override
     public String toString() {
         return "Paciente{" +
@@ -97,6 +109,11 @@ public class Paciente {
                 ", respuestas=" + respuestas +
                 ", sesiones=" + sesiones +
                 ", alertas=" + alertas +
+                ", diarios=" + diarios +
                 '}';
+    }
+
+    public void setId(Long id) {
+
     }
 }

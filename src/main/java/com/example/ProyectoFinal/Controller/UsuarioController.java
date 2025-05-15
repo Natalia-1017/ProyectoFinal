@@ -1,6 +1,7 @@
 package com.example.ProyectoFinal.Controller;
 
 import com.example.ProyectoFinal.Model.Usuario;
+import com.example.ProyectoFinal.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,10 @@ public class UsuarioController {
     @PostMapping("/guardar-multiples")
     public List<Usuario> guardarMultiples(@RequestBody List<Usuario> usuarios) {
         return usuarioService.guardarTodos(usuarios);
+    }
+    @GetMapping("/buscar/{id}")
+    public Usuario buscarPorId(@PathVariable Long id) {
+        return usuarioService.buscarPorId(id);
     }
 
     @GetMapping("/listar")

@@ -11,18 +11,20 @@ public class Usuario {
     private String nombre;
     private String correo;
     private String contraseña;
-    private String rol; // "PACIENTE" o "PSICOLOGO"
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+
 
     @OneToOne(mappedBy = "usuario")
     private Paciente paciente;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Psicologo psicologo;
 
     public Usuario() {
     }
 
-    public Usuario(Long idUsuario, String nombre, String correo, String contraseña, String rol, Paciente paciente, Psicologo psicologo) {
+    public Usuario(Long idUsuario, String nombre, String correo, String contraseña, Rol rol, Paciente paciente, Psicologo psicologo) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.correo = correo;
@@ -64,11 +66,11 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 
@@ -95,9 +97,13 @@ public class Usuario {
                 ", nombre='" + nombre + '\'' +
                 ", correo='" + correo + '\'' +
                 ", contraseña='" + contraseña + '\'' +
-                ", rol='" + rol + '\'' +
+                ", rol=" + rol +
                 ", paciente=" + paciente +
                 ", psicologo=" + psicologo +
                 '}';
+    }
+
+    public void setId(Long id) {
+
     }
 }
