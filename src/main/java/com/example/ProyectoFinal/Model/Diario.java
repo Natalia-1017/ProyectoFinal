@@ -16,7 +16,7 @@ public class Diario {
     @ManyToOne
     private Paciente paciente;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String entrada;
 
     public Diario() {
