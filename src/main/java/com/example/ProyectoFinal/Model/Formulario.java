@@ -1,6 +1,8 @@
 package com.example.ProyectoFinal.Model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -8,8 +10,8 @@ public class Formulario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFormulario;
-
     private String nombre;
+    private LocalDateTime fecha;
 
     @ManyToOne
     @JoinColumn(name = "id_psicologo")
@@ -24,9 +26,10 @@ public class Formulario {
     public Formulario() {
     }
 
-    public Formulario(Long idFormulario, String nombre, Psicologo psicologo, List<PreguntaFormulario> preguntas, List<RespuestaFormulario> respuestas) {
+    public Formulario(Long idFormulario, String nombre, LocalDateTime fecha, Psicologo psicologo, List<PreguntaFormulario> preguntas, List<RespuestaFormulario> respuestas) {
         this.idFormulario = idFormulario;
         this.nombre = nombre;
+        this.fecha = fecha;
         this.psicologo = psicologo;
         this.preguntas = preguntas;
         this.respuestas = respuestas;
@@ -46,6 +49,14 @@ public class Formulario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
     }
 
     public Psicologo getPsicologo() {
@@ -72,18 +83,19 @@ public class Formulario {
         this.respuestas = respuestas;
     }
 
+    public void setId(Long id) {
+
+    }
+
     @Override
     public String toString() {
         return "Formulario{" +
                 "idFormulario=" + idFormulario +
                 ", nombre='" + nombre + '\'' +
+                ", fecha=" + fecha +
                 ", psicologo=" + psicologo +
                 ", preguntas=" + preguntas +
                 ", respuestas=" + respuestas +
                 '}';
-    }
-
-    public void setId(Long id) {
-
     }
 }
